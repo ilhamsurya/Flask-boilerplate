@@ -1,7 +1,7 @@
 RUN VIRTUAL ENVIRONMENT DULU
 
 Install node modules nya DULU
-    npm install
+    npm install (didalam folder frontend)
     
 Install Virtual ENV
     pip install virtualenv
@@ -31,7 +31,7 @@ Linting Error, disable pylint atau add di setting.json
     "python.linting.pylintPath": "${workspaceFolder}\\venv\\Scripts\\pylint.exe",
 
 Run Backend 
-    flask run
+    flask run (akan melakukan run sesuai .env)
 
 Run Frontend
     npm start di folder Frontend
