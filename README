@@ -4,6 +4,7 @@ Install node modules nya DULU
     npm install (didalam folder frontend)
     
 Install Virtual ENV
+    install nya di root projek aja
     pip install virtualenv
     virtualenv -p python3 venv
     run activate.bat di venv/Scripts/activate.bat
