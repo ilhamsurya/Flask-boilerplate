@@ -1,32 +1,29 @@
 RUN VIRTUAL ENVIRONMENT DULU
 
+Install node modules nya DULU
+    npm install
+    
 Install Virtual ENV
     pip install virtualenv
     virtualenv -p python3 venv
     run activate.bat di venv/Scripts/activate.bat
 
-Install Flask
-    pip install flask
+Trus install dependency dari requirement.txt (DI DALAM VIRTUAL ENV)
+    pip install -r requirements.txt
+
+Kalo nambah library pip jangan lupa nge RUN (Biar kecatet requirementnya di root aja)
+    pip freeze > requirement.txt 
 
 Check installation in env
     pip list
 
-Run Flask Application
+Run Flask Application (Ini di dalam folder backend dulu sementara)
     python app.py
-
-Export Flask To Development
-    export FLASK_ENV = Development
 
 Buat .ENV di folder root isinya
     FLASK_APP=api.py
     FLASK_ENV=development
     flask run
-
-Kalo nambah library pip jangan lupa nge RUN
-    pip freeze > requirement.txt 
-
-Trus install dependency dari requirement.txt
-    pip install -r requirements.txt
 
 Linting Error, disable pylint atau add di setting.json
     "python.linting.pylintEnabled": true,
