@@ -9,7 +9,7 @@ Install Virtual ENV
     run activate.bat di venv/Scripts/activate.bat
 
 Trus install dependency dari requirement.txt (DI DALAM VIRTUAL ENV)
-    pip install -r requirements.txt
+    pip install -r requirement.txt
 
 Kalo nambah library pip jangan lupa nge RUN (Biar kecatet requirementnya di root aja)
     pip freeze > requirement.txt 
