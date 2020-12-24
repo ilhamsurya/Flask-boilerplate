@@ -1,8 +1,18 @@
-RUN VIRTUAL ENVIRONMENT DULU
+RUN VIRTUAL ENVIRONMENT DULU (Kalo udh nginstall semuanya dan mau ngoding)
+    run activate.bat di venv/Scripts/activate.bat
 
+BAGIAN FRONTEND
 Install node modules nya DULU
     npm install (didalam folder frontend)
-    
+
+Run Frontend
+    npm start di folder Frontend (bakal ngejalanin app.js yg ada di folder src)
+
+Develop React
+    Develop react ntar bisa mulai dari bikin komponennya di folder components trus diexport di pages dan dipake di app.js
+    (udh urg bikin contohnya liat aja dlu) 
+
+BAGIAN BACKEND
 Install Virtual ENV
     install nya di root projek aja
     pip install virtualenv
@@ -18,23 +28,34 @@ Kalo nambah library pip jangan lupa nge RUN (Biar kecatet requirementnya di root
 Check installation in env
     pip list
 
-Run Flask Application (Ini di dalam folder backend dulu sementara)
-    python app.py
+Run Flask Script (Ini buat ngejalanin API nya satu satu)
+    cd dulu ke folder backend/api
+    python nama_file.py
 
 Buat .ENV di folder root isinya
     FLASK_APP=api.py
     FLASK_ENV=development
     flask run
 
+Run Backend 
+    flask run (akan melakukan run sesuai .env)
+
+
+DAFTAR ERROR DAN SOLUSINYA 
+
 Linting Error, disable pylint atau add di setting.json
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": false,
     "python.linting.pylintPath": "${workspaceFolder}\\venv\\Scripts\\pylint.exe",
 
-Run Backend 
-    flask run (akan melakukan run sesuai .env)
-
-Run Frontend
-    npm start di folder Frontend
-
+Import module not found atau error 
+    Blum terdaftar di sys.main
+    caranya bisa nge SET dulu lokasi folder projek kitanya 
+    contoh: set  PYTHONPATH=C:\Users\ilham\Desktop\Habitat\aplikasita
+    kalo udh di set langsung run Script
+        python -c "import sys; print(sys.path)"
+    misalnya udh masuk nanti bakal kek gini 
+        ['', 'C:\\Users\\ilham\\Desktop\\Habitat\\aplikasita', 'C:\\Python39\\python39.zip', 
+        'C:\\Python39\\DLLs', 'C:\\Python39\\lib', 'C:\\Python39', 
+        'C:\\Users\\ilham\\AppData\\Roaming\\Python\\Python39\\site-packages', 'C:\\Python39\\lib\\site-packages']
 

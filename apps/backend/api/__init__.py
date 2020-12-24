@@ -1,5 +1,5 @@
 from flask import Flask
-
+from apps.backend.database.conn import connect
 app = Flask(__name__)
 
 

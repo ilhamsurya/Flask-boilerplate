@@ -20,5 +20,6 @@ else:
     MYSQL_ROOT_USER = 'root'
     MYSQL_ROOT_PASSWORD = ''
     MYSQL_HOST = 'localhost'
+    MYSQL_DATABASE = 'aplikasita'
     PERMANENT_SESSION_LIFETIME = datetime.timedelta(hours=8)
     DEBUG = True
