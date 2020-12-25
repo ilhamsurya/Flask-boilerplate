@@ -1,17 +1,15 @@
-import mysql.connector
-from backend.instance.config import MYSQL_ROOT_PASSWORD, MYSQL_ROOT_USER, MYSQL_HOST, MYSQL_DATABASE
+import mysql.connector as mysql
 
-config = {
-    "user": MYSQL_ROOT_USER,
-    "password": MYSQL_ROOT_PASSWORD,
-    "database": MYSQL_DATABASE,
-    "host": MYSQL_HOST
-}
-
-def connect(config=config):
+def connect():
     try:
-        conn = mysql.connector.connect(**config)
+        conn = mysql.connect(
+            user = "root",
+            password = "",
+            database = "",
+            host = "localhost"
+        )
         print(conn)
+        
     except:
         conn = None
 
