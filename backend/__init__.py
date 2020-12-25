@@ -1,11 +1,9 @@
 from flask import Flask
-from apps import app as application
+from backend.database.conn import connect
+app = Flask(__name__)
 
-app = flask.Flask("__main__")
-
-
-@app.route('/api', methods=['GET'])
-def index():
+@app.route('/', methods=['GET'])
+def api():
     return {
         'name': 'Welcome To FLASK'
     }

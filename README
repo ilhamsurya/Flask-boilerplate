@@ -1,42 +1,31 @@
 RUN VIRTUAL ENVIRONMENT DULU (Kalo udh nginstall semuanya dan mau ngoding)
-    run activate.bat di venv/Scripts/activate.bat
+    run activate.bat di backend/venv/Scripts/activate.bat
 
 BAGIAN FRONTEND
 Install node modules nya DULU
-    npm install (didalam folder frontend)
-
+    npm install
 Run Frontend
-    npm start di folder Frontend (bakal ngejalanin app.js yg ada di folder src)
+    npm start/yarn start langsung di root 
 
-Develop React
-    Develop react ntar bisa mulai dari bikin komponennya di folder components trus diexport di pages dan dipake di app.js
-    (udh urg bikin contohnya liat aja dlu) 
+BAGIAN BACKEND (Di dalam folder backend semuanya)
+Install pip 
+    python get-pip.py
 
-BAGIAN BACKEND
 Install Virtual ENV
-    install nya di root projek aja
+    install nya di folder backend 
     pip install virtualenv
     virtualenv -p python3 venv
     run activate.bat di venv/Scripts/activate.bat
 
 Trus install dependency dari requirement.txt (DI DALAM VIRTUAL ENV)
-    pip install -r requirement.txt
+     pip install -r requirement.txt
 
 Kalo nambah library pip jangan lupa nge RUN (Biar kecatet requirementnya di root aja)
     pip freeze > requirement.txt 
 
 Check installation in env
     pip list
-
-Run Flask Script (Ini buat ngejalanin API nya satu satu)
-    cd dulu ke folder backend/api
-    python nama_file.py
-
-Buat .ENV di folder root isinya
-    FLASK_APP=api.py
-    FLASK_ENV=development
-    flask run
-
+    
 Run Backend 
     flask run (akan melakukan run sesuai .env)
 
