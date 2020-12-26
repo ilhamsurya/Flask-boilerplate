@@ -6,7 +6,7 @@ function App() {
   const [initialData, setInitialData] = useState([{}])
 
   useEffect(() => {
-    fetch('/').then(
+    fetch('/login').then(
       response => response.json()
     ).then(data => console.log(data))
   })

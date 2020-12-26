@@ -5,7 +5,7 @@ from passlib.hash import sha256_crypt
 auth_routes = Blueprint('auth_routes', __name__)
 
 # Endpoint for login
-@auth_routes.route('/api/login', methods=['POST'])
+@auth_routes.route('/login', methods=['POST'])
 def userLogin():
     conn = connect()
     c = conn.cursor()
