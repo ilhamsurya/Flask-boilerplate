@@ -1,0 +1,1 @@
+from aplikasi.backend.query.mahasiswa import *
