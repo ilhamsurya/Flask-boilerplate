@@ -30,6 +30,28 @@ Run Backend
     flask run (akan melakukan run sesuai .env)
 
 
+ALUR PERKODINGAN BACKEND
+Folder Backend
+Folder API buat nampung semua api yg dipake di web, kalo udh buat api panggil di __init__.py
+Folder Database buat koneksi dkk (udh disetting)
+Folder Helper buat nambahin kondisi di web nya (kayak ngatur access atau ngecek token)
+    decorator = dipakenya sbg kondisi (ex: @dosen_only atau @login_required)
+    func = buat fungsi yg bakal dipake dibeberapa api, biar clean codingannya 
+Folder Query buat SQL syntax (ex: buat ngeliat semua mahasiswa) makenya opsional sih kalo emg kira kira syntax SQL cuma dipake sekali langsung di API nya aja
+Panggil di __init__.py paling root kalo udh dibuat
+
+Folder Frontend (bukan react)
+masing masing dashboard karena bakal beda menu jadi dibikin folder terpisah
+contoh folder landing itu dipake sebelum login (landing page, login, register, forgot pass)
+folder mahasiswa sama dosen dipake buat menu menu yg ada di dashboard mereka
+
+cara buat page di frontend, 
+    file mahasiswa.py atau dosen.py itu routing buat frontend, jdi dimulai dari situ
+    trus render_template nya ngarah ke folder templates langsung aja panggil /index.html prefixnya make templates
+    kalo udh di __init__.py yang folder frontend panggil modul mahasiswa.py/dosen.py nya
+    terakhir panggil di __init__.py paling dasar 
+
+
 DAFTAR ERROR DAN SOLUSINYA 
 
 Linting Error, disable pylint atau add di setting.json
