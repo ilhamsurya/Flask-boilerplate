@@ -10,19 +10,15 @@ from flask import (
 from passlib.hash import sha256_crypt
 from datetime import datetime
 from aplikasi.backend.database.conn import connect
-from aplikasi.backend.query import seeMahasiswa, seeOneMahasiswa
+from aplikasi.backend.query import seeDosen, seeOneDosen
 from aplikasi.backend.helper.decorator import login_required
 
+dosen_api = Blueprint("dosen_api", __name__)
 
-mahasiswa_api = Blueprint("mahasiswa_api", __name__)
-
-# Endpoint Buat Mahasiswa
-
-
-# Liat semua Mahasiswa
-@mahasiswa_api.route("/", methods=["GET"])
-def AllMahasiswa():
-    response = seeMahasiswa()
+# Liat semua Dosen
+@dosen_api.route("/", methods=["GET"])
+def AllDosen():
+    response = seeDosen()
     data = response.get("data", None)
 
     if data is None:
@@ -35,10 +31,10 @@ def AllMahasiswa():
         return {"msg": "Query Successful", "data": data}
 
 
-# Liat Profil Mahasiswa
-@mahasiswa_api.route("/<int:id>", methods=["GET"])
-def ProfilMahasiswa(id):
-    response = seeOneMahasiswa(id)
+# Liat Profil Dosen
+@dosen_api.route("/<int:id>", methods=["GET"])
+def ProfilDosen(id):
+    response = seeOneDosen(id)
     data = response.get("data", None)
 
     if data is None:
@@ -51,9 +47,9 @@ def ProfilMahasiswa(id):
         return {"msg": "Query Successful", "data": data}
 
 
-# Tambah Mahasiswa
-@mahasiswa_api.route("/new", methods=["POST"])
-def createMahasiswa():
+# Tambah Dosen
+@dosen_api.route("/new", methods=["POST"])
+def createDosen():
 
     try:
         conn = connect()
@@ -62,14 +58,13 @@ def createMahasiswa():
         username = request.form["username"]
         password = sha256_crypt.encrypt(request.form["password"])
         name = request.form["name"]
-        nim = request.form["nim"]
+        nip = request.form["nip"]
         email = request.form["email"]
         phone = request.form["phone"]
-        jurusan_id = request.form["jurusan_id"]
-        prodi_id = request.form["prodi_id"]
+        access = "dosen"
 
         c.execute(
-            "SELECT * FROM mahasiswa WHERE username = %s or email = %s or phone = %s",
+            "SELECT * FROM dosen WHERE username = %s or email = %s or phone = %s",
             (username, email, phone),
         )
 
@@ -81,21 +76,20 @@ def createMahasiswa():
 
         c.execute(
             """
-        INSERT INTO mahasiswa ( 
-            username, password, name, nim, email, phone, jurusan_id, prodi_id, createdAt, updatedAt 
+        INSERT INTO dosen ( 
+            username, password, name, nip, email, phone, access, createdAt, updatedAt
             ) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                %s, %s, %s, %s, %s, %s, %s, %s, %s
             )
         """,
             (
                 username,
                 password,
                 name,
-                nim,
+                nip,
                 email,
                 phone,
-                jurusan_id,
-                prodi_id,
+                access,
                 datetime.now(),
                 datetime.now(),
             ),
@@ -112,10 +106,10 @@ def createMahasiswa():
         return redirect(request.referrer)
 
 
-# Endpoint for updating a student
-@mahasiswa_api.route("/<int:id>", methods=["POST"])
+# Endpoint for updating a Dosen
+@dosen_api.route("/<int:id>", methods=["POST"])
 @login_required
-def updateMahasiswa(id):
+def updateDosen(id):
     conn = connect()
     c = conn.cursor(dictionary=True)
 
@@ -124,20 +118,16 @@ def updateMahasiswa(id):
         email = request.form["email"]
         phone = request.form["phone"]
         name = request.form["name"]
-        nim = request.form["nim"]
-        jurusan_id = request.form["jurusan_id"]
-        prodi_id = request.form["prodi_id"]
+        nip = request.form["nip"]
 
         c.execute(
             """
-        UPDATE mahasiswa SET 
+        UPDATE dosen SET 
         email = %s, 
         password = %s, 
         phone = %s, 
         name = %s,  
-        nim = %s,
-        jurusan_id = %s,
-        prodi_id = %s,
+        nip = %s,
         updatedAt = %s
         WHERE id = %s
         """,
@@ -146,9 +136,7 @@ def updateMahasiswa(id):
                 new_password,
                 phone,
                 name,
-                nim,
-                jurusan_id,
-                prodi_id,
+                nip,
                 datetime.now(),
                 id,
             ),
@@ -157,19 +145,15 @@ def updateMahasiswa(id):
         email = request.form["email"]
         phone = request.form["phone"]
         name = request.form["name"]
-        nim = request.form["nim"]
-        jurusan_id = request.form["jurusan_id"]
-        prodi_id = request.form["prodi_id"]
+        nip = request.form["nip"]
 
         c.execute(
             """
-        UPDATE mahasiswa SET 
+        UPDATE dosen SET 
         email = %s, 
         phone = %s, 
         name = %s,  
-        nim = %s,
-        jurusan_id = %s,
-        prodi_id = %s,
+        nip = %s,
         updatedAt = %s
         WHERE id = %s
         """,
@@ -177,9 +161,7 @@ def updateMahasiswa(id):
                 email,
                 phone,
                 name,
-                nim,
-                jurusan_id,
-                prodi_id,
+                nip,
                 datetime.now(),
                 id,
             ),
@@ -190,19 +172,19 @@ def updateMahasiswa(id):
     return redirect(request.referrer)
 
 
-# Endpoint for updating a student
-@mahasiswa_api.route("/<int:id>", methods=["DELETE"])
+# Endpoint for deleting a dosen
+@dosen_api.route("/<int:id>", methods=["DELETE"])
 @login_required
-def deleteMahasiswa(id):
+def deleteDosen(id):
     conn = connect()
     c = conn.cursor(dictionary=True)
 
-    c.execute("SELECT * FROM mahasiswa WHERE id = %s", (id,))
+    c.execute("SELECT * FROM dosen WHERE id = %s", (id,))
     result = c.fetchone()
     result["password"] = None
 
-    c.execute("DELETE FROM mahasiswa WHERE id = %s", (id,))
+    c.execute("DELETE FROM dosen WHERE id = %s", (id,))
     conn.commit()
     c.close()
 
-    return {"msg": "Mahasiswa berhasil dihapus", "data": result}
+    return {"msg": "dosen berhasil dihapus", "data": result}

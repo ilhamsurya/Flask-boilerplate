@@ -27,3 +27,16 @@ def login_required(f):
         return redirect("/logout")
 
     return decorated_function
+
+
+def dosen_only(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        access = dict(session).get("access", None)
+
+        if access == "dosen":
+            return f(*args, **kwargs)
+
+        return redirect("/api/logout")
+
+    return decorated_function

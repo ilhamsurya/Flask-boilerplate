@@ -23,22 +23,35 @@ def login_user():
     result = c.fetchone()
 
     if result is None:
-        flash("You are now logged in", "success")
-        return redirect(f"/{result['username']}")
+        c.execute("SELECT * FROM mahasiswa WHERE email = %s", [username])
+        result = c.fetchone()
+
+    if result is None:
+        c.execute("SELECT * FROM dosen WHERE username = %s", [username])
+        result = c.fetchone()
+
+    if result is None:
+        c.execute("SELECT * FROM dosen WHERE email = %s", [username])
+        result = c.fetchone()
+
+    if result is None:
+        flash("failed logged in", "failed")
+        return redirect("/login")
 
     # Compare Passwords
     if sha256_crypt.verify(password, result["password"]):
-        # Passed
         session["id"] = result["id"]
-        session["token"] = makeToken(session["id"])
-        session["username"] = username
+        if result.get("access", None) is not None:
+            session["token"] = makeToken(session["id"])
+            session["access"] = result["access"]
+            session["username"] = username
 
-        flash("You are now logged in", "success")
-        return redirect(f"/{result['username']}")
-
-    else:
-        flash("You are now logged in", "success")
-        return redirect(f"/{result['username']}")
+            if session["access"] == "dosen":
+                session["token"] = makeToken(session["id"])
+                return redirect(f"/dashboard")
+        else:
+            session["token"] = makeToken(session["id"])
+            return redirect(f"/dashboard/{result['username']}")
 
 
 # Endpoint for logging out

@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, url_for, render_template, flash, Response
 from aplikasi.backend.database.conn import connect
-from aplikasi.backend.helper.decorator import check_for_token
+from aplikasi.backend.helper.decorator import check_for_token, login_required
 from datetime import datetime
 
 landing = Blueprint(
@@ -12,6 +12,12 @@ landing = Blueprint(
 def home():
     title = "Sistem Kompetensi Mahasiswa"
     return render_template("/landing/index.html", title=title)
+
+
+@landing.route("/dosenonly")
+def dosenonly():
+    title = "Akses Terbatas"
+    return render_template("/auth/dosenonly.html", title=title)
 
 
 @landing.route("/login")

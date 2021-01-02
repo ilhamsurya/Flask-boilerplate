@@ -15,10 +15,13 @@ app.config.from_pyfile("config.py")
 # Registering backend routes
 app.register_blueprint(auth_api)
 app.register_blueprint(mahasiswa_api, url_prefix="/api/mahasiswa")
+app.register_blueprint(dosen_api, url_prefix="/api/dosen")
 
 # Registering frontend routes
 app.register_blueprint(landing)
 app.register_blueprint(mahasiswa)
+app.register_blueprint(dosen)
+
 # Registering api routes
 
 

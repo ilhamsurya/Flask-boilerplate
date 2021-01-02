@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INI BUAT REGISTER</title>
+</head>
+
 <h1>Sign pU</h1>
 <form action="/api/mahasiswa/new" method="post">
-    <input type="text" name="username" placeholder="username">
-    <input type="number" name="nim" placeholder="nim">
-    <input type="text" name="name" placeholder="name">
-    <input type="email" name="email" placeholder="email">
-    <input type="number" name="phone" placeholder="phone">
-    <input type="number" name="jurusan_id" placeholder="jurusan_id">
-    <input type="number" name="prodi_id" placeholder="prodi_id">
-    <input type="password" name="password" placeholder="password">
-    <input type="submit" value="register">
+    <a href="/register/mahasiswa">Daftar Sebagai Mahasiswa</a>
+    <a href="/register/dosen">Daftar Sebagai Dosen</a>
 </form>
 {% endblock %}
