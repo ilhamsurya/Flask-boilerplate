@@ -40,6 +40,7 @@ Folder Helper buat nambahin kondisi di web nya (kayak ngatur access atau ngecek 
 Folder Query buat SQL syntax (ex: buat ngeliat semua mahasiswa) makenya opsional sih kalo emg kira kira syntax SQL cuma dipake sekali langsung di API nya aja
 Panggil di __init__.py paling root kalo udh dibuat
 
+ALUR PERKODINGAN FRONTEND
 Folder Frontend (bukan react)
 masing masing dashboard karena bakal beda menu jadi dibikin folder terpisah
 contoh folder landing itu dipake sebelum login (landing page, login, register, forgot pass)
